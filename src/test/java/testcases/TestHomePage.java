@@ -12,5 +12,7 @@ public class TestHomePage extends DriverSetup {
         getDriver().get(homePage.homePageUrl);
         Assert.assertEquals(getDriver().getCurrentUrl(),"https://www.wafilife.com/");
         Assert.assertEquals(getDriver().getTitle(),"Buy Islamic Books - Online Book Shop in Bangladesh | Wafilife");
+        homePage.clickOnElement(homePage.myAccount);
+
     }
 }
