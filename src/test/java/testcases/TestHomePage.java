@@ -9,7 +9,7 @@ public class TestHomePage extends DriverSetup {
     HomePage homePage=new HomePage();
     @Test
     public void testHomePageUrl(){
-        getDriver().get(homePage.homePageUrl);
+        getDriver().get(homePage.baseUrl);
         Assert.assertEquals(getDriver().getCurrentUrl(),"https://www.wafilife.com/");
         Assert.assertEquals(getDriver().getTitle(),"Buy Islamic Books - Online Book Shop in Bangladesh | Wafilife");
         homePage.clickOnElement(homePage.myAccount);
