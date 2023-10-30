@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="methods" name="Suite">
+    <test thread-count="4" parallel="methods" verbose="2" preserve-order="true" name="test">
+        <classes>
+            <class name="testcases.TestHomePage">
+                <methods>
+                    <include name="testHomePageUrl"/>
+                </methods>
+            </class>
+
+            <class name="testcases.TestRegisterAndLogInPage">
+                <methods>
+                    <include name="testRegister"/>
+                    <include name="testLogInWithValidData"/>
+                    <include name="testLogInWithInvalidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TestPurchaseBook">
+                <methods>
+                    <include name="testPuschaseProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

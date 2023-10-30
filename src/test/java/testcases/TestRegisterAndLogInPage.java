@@ -24,6 +24,7 @@ public class TestRegisterAndLogInPage extends DriverSetup {
         registerAndLogInPage.inputElement(registerAndLogInPage.passwordField,"12345678");
         registerAndLogInPage.inputElement(registerAndLogInPage.confirmPasswordField,"12345678");
         registerAndLogInPage.clickOnElement(registerAndLogInPage.registerBtn);
+        registerAndLogInPage.addScreenshotToReport("After Complete the registration successfully");
         Assert.assertEquals(registerAndLogInPage.getElementText(registerAndLogInPage.success),registerAndLogInPage.successMsg);
         Assert.assertEquals(getDriver().getTitle(),registerAndLogInPage.pageTittle);
         Assert.assertTrue(registerAndLogInPage.isElementVisible(registerAndLogInPage.success));
@@ -33,6 +34,7 @@ public class TestRegisterAndLogInPage extends DriverSetup {
         registerAndLogInPage.inputElement(registerAndLogInPage.usernameOrEmailFieldForLogIn,"rif420");
         registerAndLogInPage.inputElement(registerAndLogInPage.passwordFieldForLogIn,"12345678");
         registerAndLogInPage.clickOnElement(registerAndLogInPage.logInBtn);
+        registerAndLogInPage.addScreenshotToReport("After Login with Valid Data");
         Assert.assertEquals(registerAndLogInPage.getElementText(registerAndLogInPage.success),registerAndLogInPage.successMsg);
         Assert.assertEquals(getDriver().getTitle(),registerAndLogInPage.pageTittle);
         Assert.assertTrue(registerAndLogInPage.isElementVisible(registerAndLogInPage.success));
@@ -42,6 +44,7 @@ public class TestRegisterAndLogInPage extends DriverSetup {
         registerAndLogInPage.inputElement(registerAndLogInPage.usernameOrEmailFieldForLogIn,username);
         registerAndLogInPage.inputElement(registerAndLogInPage.passwordFieldForLogIn,password);
         registerAndLogInPage.clickOnElement(registerAndLogInPage.logInBtn);
+        registerAndLogInPage.addScreenshotToReport("After Log in with Invalid Data");
         Assert.assertEquals(registerAndLogInPage.getElementText(registerAndLogInPage.error),errorMsg);
     }
 

@@ -4,7 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
@@ -30,7 +32,7 @@ public class DriverSetup {
             throw new RuntimeException("Browser Not Found! Using the given browser: "+browserName);
         }
     }
-    @BeforeSuite
+    @BeforeMethod
     public static synchronized void setBrowser(){
         WebDriver driver=createBrowser(browserName);
         driver.manage().window().maximize();
@@ -38,7 +40,7 @@ public class DriverSetup {
         setDriver(driver);
 
     }
-    @AfterSuite
+    @AfterMethod
     public static synchronized void quitBrowser(){
         getDriver().quit();
     }

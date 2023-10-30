@@ -1,5 +1,10 @@
 package testcases;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
@@ -23,16 +28,40 @@ public class TestPurchaseBook extends DriverSetup {
     @Test
     public void testPuschaseProduct() {
         registerAndLogInPage.clickOnElement(homePage.author);
+        authorPage.addScreenshotToReport("After entering the author page");
+        Assert.assertEquals(getDriver().getCurrentUrl(),authorPage.authorPageUrl);
+        Assert.assertEquals(getDriver().getTitle(),authorPage.authorPageTittle);
+        authorPage.clickOnElement(authorPage.nextPageBtn);
+        authorPage.back();
+        Assert.assertEquals(getDriver().getCurrentUrl(),authorPage.authorPageUrl);
+        authorPage.scrollToElement(authorPage.youssufAli);
         authorPage.clickOnElement(authorPage.youssufAli);
+        youssufAliPage.addScreenshotToReport("After going to Youssuf Ali page");
+        Assert.assertEquals(getDriver().getCurrentUrl(),youssufAliPage.baseUrl);
+        Assert.assertEquals(getDriver().getTitle(),youssufAliPage.pageTittle);
         youssufAliPage.clickOnElement(youssufAliPage.product);
+        productPage.addScreenshotToReport("After click on product");
         productPage.clickOnElement(productPage.orderBtn);
+        productPage.addScreenshotToReport("After click on Order Button");
         productPage.clickOnElement(productPage.checkoutBtn);
-       // checkoutPage.selectWithVisibleText(checkoutPage.zilla,"Dhaka");
-        checkoutPage.selectWithVisibleText(checkoutPage.area, "কাকরাইল");
+        checkoutPage.addScreenshotToReport("After going to checkout page");
+        Assert.assertEquals(getDriver().getCurrentUrl(),checkoutPage.baseUrl);
+        Assert.assertEquals(getDriver().getTitle(),checkoutPage.pageTittle);
+        checkoutPage.inputElement(checkoutPage.optionalPhoneNumber, "12345678901");
+        // checkoutPage.selectWithVisibleText(checkoutPage.zilla,"Dhaka");
+        try {
+            checkoutPage.selectWithVisibleText(checkoutPage.area, "কাকরাইল");
+        } catch (StaleElementReferenceException st) {
+            checkoutPage.selectWithVisibleText(By.xpath("//select[@id='billing_area']"), "কাকরাইল");
+        }
+
         checkoutPage.inputElement(checkoutPage.addressField, "12/c road");
-        checkoutPage.scrollToElement(checkoutPage.finalOrderBtn);
-        checkoutPage.clickOnElement(homePage.myAccount);
+        checkoutPage.addScreenshotToReport("After fill up the checkout info. form");
+        checkoutPage.clickOnElement(checkoutPage.myAccount);
         registerAndLogInPage.clickOnElement(registerAndLogInPage.logOutBtn);
+        registerAndLogInPage.addScreenshotToReport("After Logout");
+        Assert.assertEquals(getDriver().getCurrentUrl(),registerAndLogInPage.baseUrl);
+        Assert.assertEquals(getDriver().getTitle(),registerAndLogInPage.pageTittle);
     }
 
 }

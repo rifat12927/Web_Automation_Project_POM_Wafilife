@@ -65,10 +65,19 @@ public class BasePage extends DriverSetup {
         Select select=new Select(getElement(locator));
         select.selectByValue(value);
     }
+    public void selectByIndex(By locator,int index){
+        Select select=new Select(getElement(locator));
+        select.selectByIndex(index);
+    }
 
     public void scrollToElement(By locator) {
         Actions actions = new Actions(getDriver());
+        waitForElementClickable(locator);
         actions.scrollToElement(getElement(locator)).build().perform();
+    }
+    public void scrollByAmount(int x,int y){
+        Actions actions=new Actions(getDriver());
+        actions.scrollByAmount(x,y);
     }
 
     public void hover(By locator) {
@@ -78,6 +87,12 @@ public class BasePage extends DriverSetup {
 
     public void addScreenshotToReport(String name) {
         Allure.addAttachment(name, new ByteArrayInputStream(((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES)));
+    }
+    public void back(){
+        getDriver().navigate().back();
+    }
+    public void refresh(){
+        getDriver().navigate().refresh();
     }
 
     public Faker faker = new Faker(new Locale("en-US"));
